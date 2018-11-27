@@ -14,7 +14,7 @@ import { Timetable } from './timetable.model';
 export class TimetablesService implements Resolve<any>
 {
     BASE_URL = environment.production
-      ? 'https://medica-suite-experience-api.azurewebsites.net'
+      ? 'https://vline-demo-api.azurewebsites.net'
       : 'http://localhost:5001';
       
     onTimetablesChanged: BehaviorSubject<any> = new BehaviorSubject([]);
