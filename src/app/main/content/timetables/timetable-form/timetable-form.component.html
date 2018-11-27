@@ -1,0 +1,84 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ dialogTitle }}</span>
+            <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+
+        <form [formGroup]="timetableForm">
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <mat-icon matPrefix class="mr-12 s-20 secondary-text">layers</mat-icon>
+                    <input name="departStation" formControlName="departStation" placeholder="Depart" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <mat-icon matPrefix class="mr-12 s-20 secondary-text">layers</mat-icon>
+                    <input name="arrivalStation" formControlName="arrivalStation" placeholder="Arrival Station" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput 
+                        [matDatepicker]="departDateTime"
+                        formControlName="departDateTime"
+                        placeholder="Choose a departure Date/Time" >
+                    <mat-datepicker-toggle matSuffix [for]="departDateTime"></mat-datepicker-toggle>
+                    <mat-datepicker #departDateTime></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput 
+                    [matDatepicker]="arrivalDateTime"
+                    formControlName="arrivalDateTime" 
+                    placeholder="Choose a arrival Date/Time">
+                    <mat-datepicker-toggle matSuffix [for]="arrivalDateTime"></mat-datepicker-toggle>
+                    <mat-datepicker #arrivalDateTime></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+
+        <button *ngIf="action !=='edit'"
+                mat-raised-button
+                (click)="dialogRef.close(timetableForm)"
+                class="save-button mat-accent"
+                [disabled]="timetableForm.invalid"
+                aria-label="CREATE">
+            CREATE
+        </button>
+
+        <button *ngIf="action ==='edit'"
+                mat-raised-button
+                (click)="dialogRef.close(['save',timetableForm])"
+                class="save-button mat-accent"
+                [disabled]="timetableForm.invalid"
+                aria-label="SAVE">
+            SAVE
+        </button>
+
+        <button *ngIf="action ==='edit'"
+                mat-icon-button
+                (click)="dialogRef.close(['delete',timetableForm])"
+                aria-label="Delete"
+                matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+    </div>
+</div>
